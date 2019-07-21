@@ -1,0 +1,8 @@
+3.7.3 (v3.7.3:ef4ec6ed12, Mar 25 2019, 16:52:21) 
+[Clang 6.0 (clang-600.0.57)]
+['/Users/nakamuramisato/program/project', 
+'/Library/Frameworks/Python.framework/Versions/3.7/lib/python37.zip', 
+'/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7', 
+'/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload', 
+'/Users/nakamuramisato/Library/Python/3.7/lib/python/site-packages', 
+'/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages']

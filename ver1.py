@@ -1,39 +1,27 @@
-# センサから値を取って閾値以下ならlineに通知
-
+import time
+import grovepi
 import requests
-import random
-from grovepi import * 
 
-moisture = 0
-# A0に湿度センサ
-dht_sensor_port = 7
-#ポート7に温湿度センサー
+# ifttt requests
+url = 'https://maker.ifttt.com/trigger/plant/with/key/d1Ep3s3uUhMZugkBfz5vOQ'
 
-# IFTTT_Webhook
-def ifttt_webhook(eventid,value):
-    payload = {"value1": value,
-                "value2": "",
-                "value3": "" }
-    url = 'https://maker.ifttt.com/trigger/' + eventid + '/with/key/d1Ep3s3uUhMZugkBfz5vOQ'
-    response = requests.post(url,payload)
+#sensor port
+moisture_sensor = 14 #A0
 
-# ここからスタート
-if __name__ == '__main__':
-        while True:
-            try:
-                [tmp, hum] = dht(dht_sensor_port, 1)
-                soil_moisture = analogRead(moisture)
-                print("temp = " + tmp + "C hum = " + hum + "%" )
-                print("soil moisture(analog) = " +soil_moisture)
+grovepi.pinMode(moisture_sensor,"INPUT")
 
-            except(IOError,TypeError) as e:
-                print ("Error")
-            if num == 77:
-                print ("IFTTTへ送信")
+while True:
+    try:
+        moisture_val = grovepi.analogRead(moisture_sensor)
 
-                # IFTTT_Webhook
-                # ifttt_webhook("python_test",num)
-                ifttt_webhook("plant",num)
+        print("moisture = %d" %moisture_val)
+        
+        if moisture_val > 430:
+            print("送信")
+            response = requests.post(url)
+            print("送信完了")
 
-                print ("送信しました")
-                break
+        time.sleep(1.0)
+
+    except IOError:
+        print("Error")
